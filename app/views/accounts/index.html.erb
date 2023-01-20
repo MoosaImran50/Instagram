@@ -1,0 +1,26 @@
+<div class="continer">
+  <div class="row">
+    <div class="col-8">
+      <% @posts.each do |post| %>
+        <div class="insta-post">
+          <div class="post-meta">
+            <%= link_to (image_tag post.account.image.url, class: "img-circle-small"), profile_path(post.account.username) %>
+            <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
+          </div>
+          <%= image_tag post.image.first.url, class: "img img-fluid" %>
+          <div class="post-details">
+            <%= simple_format post.description %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-4">
+      <div class="account-summary">
+        <p>
+          <strong><%= current_account.username %></strong><br/>
+          <%= current_account.full_name %><br/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

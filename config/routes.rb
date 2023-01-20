@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   root to: 'public#homepage'
 
+  resources :posts, only: [:new, :create, :show]
+
+  get "dashboard", to: 'accounts#index'
+
+  get "profile/:username", to: 'accounts#profile', as: :profile
+
   # Defines the root path route ("/")
   # root "articles#index"
 end

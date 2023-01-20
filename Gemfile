@@ -44,13 +44,23 @@ gem "bootsnap", require: false
 
 # Use Sass to process CSS
 # gem "sassc-rails"
-gem 'bootstrap-sass', '~>3.4.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 # adding devise
 gem 'devise'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
+
+# image uploads
+gem 'carrierwave', :git => 'https://github.com/carrierwaveuploader/carrierwave.git', :branch => 'master'
+gem 'cloudinary', :git => 'https://github.com/cloudinary/cloudinary_gem.git', :branch => 'master'
+gem 'fog', '~>1.37.0'
+# image resizing
+gem 'mini_magick'
+gem 'image_processing'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -60,6 +70,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # local ENV vars
+  gem "figaro"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
