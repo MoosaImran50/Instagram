@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <%= image_tag @account.image.url, class: "img-circle-big" %>
+      <%= image_tag @account.image.url, class: "img-circle-big"  if @account.image.present?  %>
     </div>
     <div class="col-8 text-left">
       <h1><%= @account.full_name %></h1>
