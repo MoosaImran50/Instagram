@@ -13,7 +13,9 @@ class AccountsController < ApplicationController
 
   def follow_account
     follow_id = params[:follow_id]
-    Follower.create(follower: current_account.id, following: follow_id)
+    Follower.create(follower_id: current_account.id, following_id: follow_id)
+
+    redirect_to dashboard_path
   end
 
   private
