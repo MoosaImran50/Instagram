@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   get "profile/:username", to: 'accounts#profile', as: :profile
 
-  get "post/like/:post_id", to: 'likes#save_like', as: :like_post
+  put "post/like/:post_id", to: 'likes#save_like', as: :like_post
+
+  post "follow/account", to: "accounts#follow_account", as: :follow_account
 
   # Defines the root path route ("/")
   # root "articles#index"

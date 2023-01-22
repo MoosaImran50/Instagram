@@ -11,6 +11,13 @@ class AccountsController < ApplicationController
     @post = @account.posts.active
   end
 
+  def follow_account
+    follow_id = params[:follow_id]
+    Follower.create(follower: current_account.id, following: follow_id)
+  end
+
+  private
+
   def set_account
     @account = Account.find_by_username(params[:username])
   end

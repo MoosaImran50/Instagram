@@ -4,15 +4,17 @@ class LikesController < ApplicationController
   def save_like
     @like = Like.new(post_id: params[:post_id], account_id: current_account.id)
 
-    respond_to do |format|
-      format.json {
-        if @like.save
-          { success: true }
-        else
-          { success: false }
-        end
-      }
+    existing_like = Like.where(post_id: params[:post_id], account_id: current_account.id)
+
+    if existing_like.any?
+      existing_like.first.destroy
+      # Unlike
+    elsif @like.save
+      # Like
     end
+
+    redirect_to dashboard_path
+
   end
 
 end

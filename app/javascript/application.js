@@ -4,3 +4,5 @@ import "controllers"
 
 //= require jquery.min
 //= require bootsrap.min
+//= require fontawesome.min
+//= require_tree .
