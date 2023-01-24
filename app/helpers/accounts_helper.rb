@@ -2,7 +2,7 @@ module AccountsHelper
 
   def profile_picture_big account
     image_path = account.image.present? ? account.image.url : "placeholder-profile.jpg"
-    image_tag(image_path, class: "img-circle-big")
+    image_tag(image_path, class: "img-circle-big img img-fluid")
   end
 
   def profile_picture_small account

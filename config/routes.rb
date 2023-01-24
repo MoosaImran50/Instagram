@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   root to: 'public#homepage'
 
-  resources :posts, only: [:new, :create, :show] # add destroy later
+  resources :posts, only: [:new, :create, :show, :destroy]
 
-  resources :comments, only: [:create] # add destroy later
+  resources :comments, only: [:create, :destroy]
 
   get "dashboard", to: 'accounts#index'
 

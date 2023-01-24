@@ -8,11 +8,17 @@
             <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
           </div>
 
-          <%= image_tag post.image.first.url, class: "img img-fluid" %>
+          <div class="fill">
+            <%= image_tag post.image.first.url, class: "img img-fluid" %>
+          </div>
 
           <div class="post-details">
 
             <div class="post-actions">
+              <% if post.account.id==current_account.id %>
+                <%= button_to 'Delete Post', post, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-warning btn-sm float-right" %>
+              <% end %>
+
               <% if post_liked_by_user?(post.id) %>
                 <%= button_to "Unlike", like_post_path(post.id), method: "put", class: "btn btn-danger btn-sm" %>
               <% else %>
@@ -43,18 +49,20 @@
           </div>
         </div>
       <% end %>
+      <br/>
     </div>
     <div class="col-4">
-      <div class="account-summary">
+      <div class="account-summary follower-suggestions">
         <p class="m-0">
-          <%= link_to (image_tag current_account.image.url, class: "img-circle-small float-left m-r-15"), profile_path(current_account.username) if current_account.image.present? %>
-          <strong><%= link_to current_account.username, profile_path(current_account.username), class: "text-dark" %></strong><br/>
+          <strong class="float-left">Welcome Back!</strong><br/><br/>
+
+          <%= link_to (image_tag current_account.image.url, class: "img-circle-medium float-left m-r-15"), profile_path(current_account.username) if current_account.image.present? %>
+          <br/>
+          <strong><%= link_to current_account.username, profile_path(current_account.username), class: "text-dark" %></strong>
+          <br/>
           <%= current_account.full_name %>
+          <br/><br/><br/>
         </p>
-      </div>
-      <div class="follower-suggestions">
-        <%= link_to "View All", '#', class: "float-right text-dark" %>
-        <p class="text-muted">Suggestions for you</p>
       </div>
     </div>
   </div>

@@ -20,10 +20,29 @@ body {
   border-radius: 25px;
 }
 
+.img-circle-medium {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
 .img-circle-big {
   width: 200px;
   height: 200px;
   border-radius: 100px;
+}
+
+.fill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+
+.fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
 }
 
 .profile-stats {
