@@ -4,6 +4,9 @@ class AccountsController < ApplicationController
   def index
     # user dashboard - post feed
     @posts = Post.active
+
+    @comment = Comment.new
+
   end
 
   def profile
