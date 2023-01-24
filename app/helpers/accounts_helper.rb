@@ -14,4 +14,8 @@ module AccountsHelper
     account_signed_in? && current_account.id == profile_id
   end
 
+  def already_followed? profile_id
+    account_signed_in? && Follower.find_by(follower_id: current_account.id, following_id: profile_id)
+  end
+
 end
