@@ -5,9 +5,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.account_id = current_account.id if account_signed_in?
     if @comment.save
-      redirect_to dashboard_path, flash: { success: "Comment was created successfully!"}
+      redirect_back(fallback_location: root_path)
     else
-      redirect_to dashboard_path, flash: { danger: "Comment was not created!"}
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
 
-    redirect_to dashboard_path
+    redirect_back(fallback_location: root_path)
   end
 
   private

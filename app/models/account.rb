@@ -9,6 +9,7 @@ class Account < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :followers, dependent: :destroy
 
   def full_name
     "#{first_name} #{last_name}"

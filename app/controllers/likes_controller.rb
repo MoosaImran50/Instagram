@@ -13,7 +13,7 @@ class LikesController < ApplicationController
       # Like
     end
 
-    redirect_to dashboard_path
+    redirect_back(fallback_location: root_path)
 
   end
 

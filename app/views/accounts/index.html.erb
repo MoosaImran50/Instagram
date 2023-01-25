@@ -2,52 +2,54 @@
   <div class="row">
     <div class="col-8">
       <% @posts.each do |post| %>
-        <div class="insta-post">
-          <div class="post-meta">
-            <%= link_to (profile_picture_small post.account), profile_path(post.account.username) %>
-            <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
-          </div>
-
-          <div class="fill">
-            <%= image_tag post.image.first.url, class: "img img-fluid" %>
-          </div>
-
-          <div class="post-details">
-
-            <div class="post-actions">
-              <% if post.account.id==current_account.id %>
-                <%= button_to 'Delete Post', post, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-warning btn-sm float-right" %>
-              <% end %>
-
-              <% if post_liked_by_user?(post.id) %>
-                <%= button_to "Unlike", like_post_path(post.id), method: "put", class: "btn btn-danger btn-sm" %>
-              <% else %>
-                <%= button_to "Like", like_post_path(post.id), method: "put", class: "btn btn-outline-danger btn-sm" %>
-              <% end %>
+        <%= turbo_frame_tag "update_feed" do %>
+          <div class="insta-post">
+            <div class="post-meta">
+              <%= link_to (profile_picture_small post.account), profile_path(post.account.username) %>
+              <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
             </div>
 
-            <p><strong><%= post.total_likes_count %> likes</strong></p>
-            <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
+            <div class="fill">
+              <%= image_tag post.image.first.url, class: "img img-fluid" %>
+            </div>
 
-            <%= simple_format post.description %>
+            <div class="post-details">
 
-            <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+              <div class="post-actions">
+                <% if post.account.id==current_account.id %>
+                  <%= button_to 'Delete Post', post, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-warning btn-sm float-right" %>
+                <% end %>
 
-            <%= render "posts/comments", post: post %>
-          </div>
-
-          <div class="comment-box">
-            <%= form_for @comment do |f| %>
-              <%= f.hidden_field :post_id, value: post.id %>
-              <div class="input-group">
-                <%= f.text_field :comment, placeholder: "Add comment here...", class: "form-control post-comment", autocomplete: "off" %>
-                  <div class="input-group-append">
-                    <%= f.submit "Post", class: "btn btn-success float-right" %>
-                  </div>
+                <% if post_liked_by_user?(post.id) %>
+                  <%= button_to "Unlike", like_post_path(post.id), method: "put", class: "btn btn-danger btn-sm" %>
+                <% else %>
+                  <%= button_to "Like", like_post_path(post.id), method: "put", class: "btn btn-outline-danger btn-sm" %>
+                <% end %>
               </div>
-            <% end %>
+
+              <p><strong><%= post.total_likes_count %> likes</strong></p>
+              <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
+
+              <%= simple_format post.description %>
+
+              <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+
+              <%= render "posts/comments", post: post %>
+            </div>
+
+            <div class="comment-box">
+              <%= form_for @comment do |f| %>
+                <%= f.hidden_field :post_id, value: post.id %>
+                <div class="input-group">
+                  <%= f.text_field :comment, placeholder: "Add comment here...", class: "form-control post-comment", autocomplete: "off" %>
+                    <div class="input-group-append">
+                      <%= f.submit "Post", class: "btn btn-success float-right" %>
+                    </div>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
       <br/>
     </div>

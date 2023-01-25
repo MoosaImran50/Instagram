@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
     follow_id = params[:follow_id]
     Follower.create(follower_id: current_account.id, following_id: follow_id)
 
-    redirect_to profile_path(Account.find(follow_id).username)
+    redirect_back(fallback_location: root_path)
   end
 
   def unfollow_account
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
     existing_follow = Follower.where(follower_id: current_account.id, following_id: follow_id)
     existing_follow.first.destroy
 
-    redirect_to profile_path(Account.find(follow_id).username)
+    redirect_back(fallback_location: root_path)
   end
 
   def search
