@@ -1,7 +1,6 @@
-<div class="container">
+<%= turbo_frame_tag "update_profile" do %>
 
-  <%= turbo_frame_tag "update_profile" do %>
-
+  <div class="container">
     <div class="row">
       <div class="col-4">
         <%= profile_picture_big @account %>
@@ -45,7 +44,6 @@
       </div>
     </div>
     <br/>
-
 
     <br/>
     <div class="continer">
@@ -103,7 +101,6 @@
       </div>
     </div>
     <br/>
+  </div>
 
-  <% end %>
-
-</div>
+<% end %>
