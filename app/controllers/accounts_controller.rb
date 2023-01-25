@@ -3,12 +3,12 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:profile]
   def index
     # user dashboard - post feed
-    # followers_ids = Follower.where(follower_id: current_account.id).map(&:following_id)
-    # followers_ids << current_account.id
+    followers_ids = Follower.where(follower_id: current_account.id).map(&:following_id)
+    followers_ids << current_account.id
 
-    # @posts = Post.includes(:account).where(account_id: followers_ids)
+    @posts = Post.includes(:account).where(account_id: followers_ids)
 
-    @posts = Post.all
+    # @posts = Post.all
 
     @comment = Comment.new
 
@@ -34,6 +34,11 @@ class AccountsController < ApplicationController
     existing_follow.first.destroy
 
     redirect_to profile_path(Account.find(follow_id).username)
+  end
+
+  def search
+    @q = Account.ransack(params[:q])
+    @accounts = @q.result(distinct: true)
   end
 
   private

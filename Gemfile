@@ -61,6 +61,9 @@ gem 'fog', '~>1.37.0'
 gem 'mini_magick'
 gem 'image_processing'
 
+# for searching
+gem 'ransack'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

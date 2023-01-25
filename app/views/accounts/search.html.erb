@@ -1,0 +1,32 @@
+<br/>
+<%= search_form_for @q, url: search_path do |f| %>
+
+  <div class="input-group">
+    <%= f.search_field :username_or_first_name_or_last_name_cont, placeholder: "Search users on Instagram", class: "form-control post-comment", autocomplete: "off" %>
+      <div class="input-group-append">
+        <%= f.submit class: "btn btn-primary" %>
+      </div>
+  </div>
+
+<% end %>
+<br/>
+
+<table class="table table-info table-striped table-hover">
+  <thead class="table-success">
+    <tr>
+      <th class="text-center">Picture</th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Username</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td class="text-center"><%= link_to (profile_picture_small account), profile_path(account.username) %></td>
+        <td class="text-center"><%= link_to account.full_name, profile_path(account.username), class: "text-dark" %></td>
+        <td class="text-center"><%= link_to account.username, profile_path(account.username), class: "text-dark" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

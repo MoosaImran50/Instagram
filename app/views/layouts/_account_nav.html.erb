@@ -5,6 +5,9 @@
   <%= link_to "New Post", new_post_path, class: "nav-link"%>
 </li>
 <li class="nav-item">
+  <%= link_to "Search", search_path, class: "nav-link"%>
+</li>
+<li class="nav-item">
   <%= link_to "My Profile", profile_path(current_account.username), class: "nav-link" %>
 </li>
 <li class="nav-item">
