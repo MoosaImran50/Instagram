@@ -6,6 +6,9 @@
         <% @posts.each do |post| %>
           <div class="insta-post">
             <div class="post-meta">
+              <% if post.account.id==current_account.id %>
+                <%= button_to 'Delete Post', post, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-info btn-sm float-right post-meta-margin-up post-meta-margin-right" %>
+              <% end %>
               <%= link_to (profile_picture_small post.account), profile_path(post.account.username) %>
               <%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %>
             </div>
@@ -18,7 +21,7 @@
 
               <div class="post-actions">
                 <% if post.account.id==current_account.id %>
-                  <%= button_to 'Delete Post', post, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-warning btn-sm float-right" %>
+                  <%= link_to "Update Post", update_post_page_path(post.id), class: "btn btn-secondary btn-sm float-right" %>
                 <% end %>
 
                 <% if post_liked_by_user?(post.id) %>
@@ -34,6 +37,8 @@
               <%= simple_format post.description %>
 
               <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+
+              <p><strong><%= post.total_comments_count %> comments</strong></p>
 
               <%= render "posts/comments", post: post %>
             </div>
@@ -58,7 +63,7 @@
           <p class="m-0">
             <strong class="float-left">Welcome Back!</strong><br/><br/>
 
-            <%= link_to (image_tag current_account.image.url, class: "img-circle-medium float-left m-r-15"), profile_path(current_account.username) if current_account.image.present? %>
+            <%= link_to (profile_picture_medium current_account), profile_path(current_account.username) %>
             <br/>
             <strong><%= link_to current_account.username, profile_path(current_account.username), class: "text-dark" %></strong>
             <br/>

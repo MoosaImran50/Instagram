@@ -4,13 +4,17 @@ Rails.application.routes.draw do
 
   root to: 'public#homepage'
 
-  resources :posts, only: [:new, :create, :show, :destroy]
+  resources :posts, only: [:new, :create, :destroy]
 
   resources :comments, only: [:create, :destroy]
 
   get "dashboard", to: 'accounts#index'
 
   get "profile/:username", to: 'accounts#profile', as: :profile
+
+  get "post/update_page/:post_id", to: 'posts#update_page', as: :update_post_page
+
+  patch "post/update/:post_id", to: 'posts#update_post', as: :update_post
 
   put "post/like/:post_id", to: 'likes#save_like', as: :like_post
 
