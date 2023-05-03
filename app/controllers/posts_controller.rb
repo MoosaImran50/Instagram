@@ -16,7 +16,16 @@ class PostsController < ApplicationController
   end
 
   def update_page
-    @post = Post.find(params[:post_id])
+    begin
+      @post = Post.find(params[:post_id])
+      if @post.account_id != current_account.id
+        flash[:error] = "You are not authorized to edit this post."
+        redirect_back(fallback_location: root_path)
+      end
+    rescue ActiveRecord::RecordNotFound
+      flash[:error] = "Post not found."
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def update_post
@@ -24,8 +33,6 @@ class PostsController < ApplicationController
 
     if @post.update(post_params)
       redirect_to profile_path(current_account.username)
-    else
-      # throw exception
     end
 
   end
