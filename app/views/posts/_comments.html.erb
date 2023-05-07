@@ -1,11 +1,12 @@
 <% post.comments.each do |comment| %>
-  <div class="comment">
+  <div class="comment-boundary">
     <% if comment.account.id==current_account.id || current_account.id==comment.post.account_id %>
-      <%= button_to 'Delete', comment, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-info btn-sm float-right" %>
+      <%= button_to 'Delete', comment, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-info btn-sm float-right delete-comment-button-margin-left" %>
     <% end %>
 
     <strong><%= comment.account.username %></strong>
     <%= comment.comment %>
+    <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
     <br/><br/>
   </div>
 <% end %>

@@ -20,10 +20,8 @@ Rails.application.routes.draw do
 
   post "follow/account", to: "accounts#follow_account", as: :follow_account
 
-  put "unfollow/account/:following_id", to: "accounts#unfollow_account", as: :unfollow_account
+  delete "unfollow/account/:following_id", to: "accounts#unfollow_account", as: :unfollow_account
 
   get "search", to: 'accounts#search'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

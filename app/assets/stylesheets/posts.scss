@@ -36,10 +36,27 @@
   box-shadow: none !important;
 }
 
+.comment-boundary {
+  word-break: break-word;
+}
+
+.bio-boundary {
+  max-width: 500px;
+  word-break: break-word;
+}
+
 .post-meta-margin-up{
   margin-top: 10px;
 }
 
 .post-meta-margin-right{
   margin-right: 15px;
+}
+
+.delete-comment-button-margin-left {
+  margin-left: 20px;
+}
+
+.container {
+  overflow-x: hidden;
 }

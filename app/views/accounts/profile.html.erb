@@ -7,12 +7,12 @@
       </div>
       <div class="col-8 text-left">
         <div class="row">
-          <div class="col-6">
-            <%= link_to "Edit Profile", edit_account_registration_path, class: "btn btn-outline-secondary float-right" if can_edit_profile?(@account.id) %>
+          <div class="col-9">
+            <%= link_to "Edit Profile", edit_account_registration_path, class: "btn btn-secondary float-right" if can_edit_profile?(@account.id) %>
 
             <% if @account.id != current_account.id %>
               <% if already_followed?(@account.id) %>
-                <%= button_to "Unfollow", unfollow_account_path(@account.id), method: "put", class: "btn btn-primary float-right" %>
+                <%= button_to "Unfollow", unfollow_account_path(@account.id), method: :delete, class: "btn btn-primary float-right" %>
               <% else %>
                 <%= form_tag follow_account_path, method: :post do %>
                   <%= hidden_field_tag :follow_id, @account.id %>
@@ -37,16 +37,18 @@
           </div>
         </div>
 
-        <p><%= @account.full_name %></p>
-        <%= simple_format @account.description %>
+        <div class="bio-boundary">
+          <p><%= @account.full_name %></p>
+          <%= simple_format @account.description %>
+          <p><%= link_to @account.website if @account.website.present? %></p>
+        </div>
 
-        <p><%= link_to @account.website if @account.website.present? %></p>
       </div>
     </div>
     <br/>
 
     <br/>
-    <div class="continer">
+    <div class="container">
       <div class="row">
         <div class="col-10">
           <% @post.each do |post| %>
@@ -80,7 +82,9 @@
                 <p><strong><%= post.total_likes_count %> likes</strong></p>
                 <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
 
-                <%= simple_format post.description %>
+                <div class="comment-boundary">
+                  <%= simple_format post.description %>
+                </div>
 
                 <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
 
@@ -93,7 +97,7 @@
                 <%= form_for @comment do |f| %>
                   <%= f.hidden_field :post_id, value: post.id %>
                   <div class="input-group">
-                    <%= f.text_field :comment, placeholder: "Add comment here...", class: "form-control post-comment", autocomplete: "off" %>
+                    <%= f.text_field :comment, placeholder: "Add comment here...", required: true, class: "form-control post-comment", autocomplete: "off" %>
                       <div class="input-group-append">
                         <%= f.submit "Post", class: "btn btn-success float-right" %>
                       </div>

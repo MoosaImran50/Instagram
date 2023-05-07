@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "update_feed" do %>
 
-  <div class="continer">
+  <div class="container">
     <div class="row">
-      <div class="col-8">
+      <div class="col-9">
         <% @posts.each do |post| %>
           <div class="insta-post">
             <div class="post-meta">
@@ -34,7 +34,9 @@
               <p><strong><%= post.total_likes_count %> likes</strong></p>
               <p><strong><%= link_to post.account.username, profile_path(post.account.username), class: "text-dark" %></strong></p>
 
-              <%= simple_format post.description %>
+              <div class="comment-boundary">
+                <%= simple_format post.description %>
+              </div>
 
               <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
 
@@ -47,7 +49,7 @@
               <%= form_for @comment do |f| %>
                 <%= f.hidden_field :post_id, value: post.id %>
                 <div class="input-group">
-                  <%= f.text_field :comment, placeholder: "Add comment here...", class: "form-control post-comment", autocomplete: "off" %>
+                  <%= f.text_field :comment, placeholder: "Add comment here...", required: true, class: "form-control post-comment", autocomplete: "off" %>
                     <div class="input-group-append">
                       <%= f.submit "Post", class: "btn btn-success float-right" %>
                     </div>
@@ -58,7 +60,7 @@
         <% end %>
         <br/>
       </div>
-      <div class="col-4">
+      <div class="col-3">
         <div class="account-summary follower-suggestions">
           <p class="m-0">
             <strong class="float-left">Welcome Back!</strong><br/><br/>

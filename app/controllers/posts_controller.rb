@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.account_id = current_account.id if account_signed_in?
     if @post.save
-      redirect_to profile_path(current_account.username)
+      redirect_to profile_path(current_account.username), success: "Post created successfully"
     else
       redirect_to new_post_path
     end
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:post_id])
 
     if @post.update(post_params)
-      redirect_to profile_path(current_account.username)
+      redirect_to profile_path(current_account.username), info: "Post updated successfully"
     end
 
   end
