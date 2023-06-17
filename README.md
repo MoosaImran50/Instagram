@@ -62,7 +62,9 @@ https://github.com/MoosaImran50/Instagram/assets/108832275/51919aa5-5653-411b-8b
 ![Screenshot from 2023-06-13 18-02-56](https://github.com/MoosaImran50/Instagram/assets/108832275/79a2ba86-abbc-44b2-b825-6f6932c2e558)
 
 
-### Versions of Rails and Ruby used in the project
+## Versions
 
-* Rails version: 7.0.4
-* Ruby version: 3.0.2p107
+The project uses the following versions:
+
+- Rails version: 7.0.4
+- Ruby version: 3.0.2p107
